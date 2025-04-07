@@ -122,6 +122,59 @@ class LinkedList {
         }
         return temp;
     }
+
+    get(index) {
+        if (index < 0 || index >= this.length) return undefined;
+
+        // My initial solution
+
+        // let temp = this.head;
+
+        // let count = 0;
+
+        // for (let i = 0; i < this.length; i++) {
+
+        //     if (count === index) {
+        //         return temp;
+        //     }
+        //     temp = temp.next;
+        //     count++;
+        // }
+
+        // More concise solution;
+
+        let temp = this.head;
+        for (let i = 0; i < index; i++) {
+            temp = temp.next;
+        }
+        return temp;
+
+    }
+
+    set(index, value) {
+        let temp = this.get(index);
+
+        if (temp) {
+            temp.value = value;
+            return true;
+        }
+        return false;
+    }
+
+    insert(index, value) {
+        if (index === 0) return this.unshift(value);
+        if (index === this.length) return this.push(value);
+        if (index < 0 || index > this.length) return false;
+
+        const temp = this.get(index - 1);
+        const newNode = new Node(value);
+
+        newNode.next = temp.next;
+        temp.next = newNode;
+        this.length++;
+        return true;
+
+    }
 }
 
 class Node {
